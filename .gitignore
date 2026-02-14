@@ -1,0 +1,13 @@
+# Mozart internal files
+.mozart-state.db
+.mozart-outcomes.json
+logs/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# OS
+.DS_Store
+Thumbs.db
