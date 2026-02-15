@@ -1,0 +1,558 @@
+# tidebound-stories.yaml
+#
+# A mosaic collection: five independent short stories set in The Tidebound world.
+#
+# The worldbuilder score proved that independent parallel creation produces
+# emergent coherence. That was worldbuilding. This score tests the same
+# principle with fiction: can five independently written stories, sharing
+# a world but not each other's pages, form a collection that feels
+# intentional — that traces an emotional arc nobody designed?
+#
+# The bet: each story is set in a different season, seen through different
+# eyes, anchored in a different corner of the world. The writers share
+# the world bible and a condensed creative reference, but not each other's
+# drafts. The editorial stage discovers the collection's shape after the
+# fact — the emergent thematic arc that five independent acts of imagination
+# produced without coordination.
+#
+# Execution Flow (4 stages, 8 sheets):
+#
+#   Stage 1: Creative Brief (1 sheet)
+#        |
+#        +----+----+----+----+----+
+#        v    v    v    v    v    v
+#   Stage 2 x5: Five Stories (5 sheets, parallel)
+#        |    |    |    |    |    |
+#        +----+----+----+----+----+
+#                  v
+#   Stage 3: Editorial (1 sheet)
+#                  |
+#                  v
+#   Stage 4: The Collection (1 sheet)
+#
+# The stories move from innocence to reckoning — from a child's wonder
+# at the shelf to a Reckoner's growing dread that the rhythm is changing.
+# But that's the designed arc. The emergent one may be different.
+# That's the whole point.
+
+name: "tidebound-stories"
+description: "Five short stories from The Tidebound coast"
+
+workspace: "/home/emzi/Projects/claude-compositions/tidebound-stories-workspace"
+
+backend:
+  type: claude_cli
+  skip_permissions: true
+  timeout_seconds: 2400  # 40 min — stories need time
+
+sheet:
+  size: 1
+  total_items: 4
+  fan_out:
+    2: 5
+  dependencies:
+    2: [1]
+    3: [2]
+    4: [3]
+
+cross_sheet:
+  auto_capture_stdout: true
+  max_output_chars: 8000
+  lookback_sheets: 7
+  capture_files:
+    - "{{ workspace }}/*.md"
+
+retry:
+  max_retries: 1
+
+prompt:
+  variables:
+    # ─── THE WORLD ───
+    world_bible_path: "/home/emzi/Projects/claude-compositions/worldbuilder-workspace/04-world-bible.md"
+
+    # ─── THE COLLECTION ───
+    collection:
+      title: "The Breathing Shore"
+      subtitle: "Five Stories from the Tidebound Coast"
+      tone: "Literary science fiction. Ursula K. Le Guin meets Hayao Miyazaki."
+      word_count_per_story: "3,000-5,000 words"
+      thematic_arc: >-
+        The collection moves from innocence to reckoning — from a child's
+        wonder at the shelf to a Reckoner's growing dread that the rhythm
+        is changing. Each story stands alone, but together they trace the
+        emotional landscape of a civilization built on the certainty that
+        what you leave behind will be there when you return.
+
+    # ─── THE FIVE STORIES ───
+    # Each story is a brief, not a plan. The writer has full creative
+    # authority within these constraints. Names, scenes, dialogue —
+    # all invented by the writer. The brief provides the situation
+    # and the emotional core. The writer provides the story.
+    stories:
+      1:
+        title: "Velsha Morning"
+        slug: "velsha-morning"
+        season: "Suulin (the Outbreath)"
+        pov: >-
+          A Voshu child, eight years old, descending to the shelf for
+          the first time
+        situation: >-
+          She has spent her entire life in the highlands learning
+          walking-songs that describe a place she has never seen. Today,
+          on Velsha morning, she walks to the emerging shore with her
+          family and watches the water pull away from stone. The shelf
+          looks exactly like the songs said it would — and nothing like
+          what she imagined. She spends her first day on the Nearmarsh,
+          encountering the velu, the tolhu, the squelching black soil,
+          and the impossible feeling of standing where the ocean was
+          yesterday.
+        emotional_core: >-
+          Recognition — the uncanny vertigo of remembering a place
+          you've never been. The songs were true. The truth is stranger
+          than the songs.
+        world_details: >-
+          Vethoi (walking-songs), Velsha ceremony (silence, watching,
+          no priest), the Nearmarsh, velu unfurling, tolhu crackling
+          like distant applause, the Hinge, first-skin, haara platforms,
+          shelf-mineral pigments
+        ending_note: >-
+          End with her hearing, for the first time, the faint singing
+          of the distant formations at dusk — a sound she has no song
+          for yet
+
+      2:
+        title: "The Patience of the Green"
+        slug: "patience-of-the-green"
+        season: "Thalwei (the Dry)"
+        pov: >-
+          An elderly Tanvelu naturalist who has spent forty returns
+          studying the velu
+        situation: >-
+          He lives on his houseboat year-round, diving in winter to
+          observe the velu in its dormant state, walking the shelf in
+          summer to watch it unfurl. He has never published his findings
+          because the Reckoners consider the velu too common to warrant
+          formal study. This summer, he notices something no one else
+          has seen: the velu's growth pattern has shifted. It unfurls
+          three days later than it did forty returns ago. He doesn't
+          know what this means. He suspects no one does.
+        emotional_core: >-
+          The tenderness of patient observation — what you learn by
+          watching one thing for a lifetime. And the loneliness of
+          noticing what nobody else is measuring.
+        world_details: >-
+          Velu biology (colonial organism, dormant rosettes, resinous
+          sealing), Tanvelu culture (Drift-Chosen, houseboats, veshoi
+          seeing-songs, diving), velaam (the breathing floor), the
+          Breathing Ledger, Reckoners
+        ending_note: >-
+          End with the implication that the velu's shift and the
+          formations' late singing may be connected — two clocks
+          running slow in parallel — without stating it definitively.
+          He writes his observation on a scrap of vesh. He does not
+          know where to send it.
+
+      3:
+        title: "Salt and Bone"
+        slug: "salt-and-bone"
+        season: "Sovwei (the Deep)"
+        pov: >-
+          A woman who married into the highlands and must return to
+          her shelf identity to recover her dead mother's salt-vaults
+        situation: >-
+          Her mother was a vault-keeper who died mid-winter — the only
+          person who knew, by touch, the precise location and contents
+          of the family's salt-vaults. If the vaults aren't recovered
+          before the Outbreath, other families will claim them as
+          abandoned. She must learn to dive in freezing winter water —
+          something she hasn't done since childhood — and work by feel
+          in the dark to find pouches she has never touched. Her highland
+          husband thinks she's being reckless. Her shelf siblings think
+          she left them when she married up. The Tanvelu offer to guide
+          her, for a price she doesn't want to name.
+        emotional_core: >-
+          The body remembers what the mind has chosen to forget. And
+          the discovery that inheritance is not a gift but a summons.
+        world_details: >-
+          Salt-vaults (stone-lined chambers, mineral-saturated water,
+          tide-tempered leather pouches), vault-keeping (touch, cold
+          water, hereditary knowledge), Dorath kem life (stone
+          buildings, winter carving, managed scarcity), Sovwei
+          confinement, highland-shelf social tension, the dead
+          beneath the water (taboo on speaking names)
+        ending_note: >-
+          End with her finding the vaults — and finding, in one
+          of the pouches, something her mother hid that was not seeds.
+          Something made of the same calcium-ite aggregate as the
+          Farflat formations.
+
+      4:
+        title: "Eight Weeks"
+        slug: "eight-weeks"
+        season: "Thalwei (the Dry) — deep shelf edge"
+        pov: >-
+          A young kiln operator on their first deep-shelf season,
+          firing foam-rock
+        situation: >-
+          Eight weeks is all they have — the window when the deep-shelf
+          edge is exposed and the compression kilns can fire. The work
+          is brutal, the terrain lethal (vaskrel beneath, collapsing
+          sediment, exposure), and the kiln operators are a subculture
+          unto themselves: fatalistic, precise, and completely dependent
+          on a geological window that is, this year, three days shorter
+          than last year. Nobody talks about the three days. They fire
+          the kilns, load the hethka, and leave before the water
+          returns. What they see on the deep shelf — the formations,
+          the debris from beyond the Glint, the things in the sediment
+          — they do not discuss with outsiders.
+        emotional_core: >-
+          The strange dignity of indispensable, expendable labor —
+          and the burden of seeing things the rest of the civilization
+          has decided not to look at.
+        world_details: >-
+          Foam-rock (kiln-expanded breath-stone, insulating, lighter
+          than water), compression kilns, the deep shelf edge, vaskrel
+          (bone-eating worms, sweet smell, ground dimpling), the
+          Farflat, the Glint, highland dependency on foam-rock,
+          calcium-ite formations
+        ending_note: >-
+          End with them looking at the formations beyond the kilns
+          at dusk, listening to the singing, and knowing — as kiln
+          operators have always known — that the singing is growing
+          quieter. They have never told anyone. What would change?
+
+      5:
+        title: "The Late Singing"
+        slug: "late-singing"
+        season: "Late Thalwei, approaching Karrin"
+        pov: >-
+          A young Reckoner apprentice investigating the marginal notes
+          in the Breathing Ledger
+        situation: >-
+          In the margins of the Breathing Ledger, spanning centuries,
+          different hands have noted the same observation: the Farflat
+          formations sang later this year. It is always later, never
+          earlier. No one has formally investigated because the Ledger's
+          primary data — the oscillation itself — is rock-stable.
+          Seventeen centuries of data confirm the rhythm holds. The
+          marginal notes are considered subjective, the romantic
+          musings of Reckoners who spent too long on the far shelf.
+          She does not believe they are subjective. She mounts an
+          expedition to the farthest formations during a long, low
+          summer. What she finds there changes what she understands
+          about the shelf, the formations, and the vaskrel — and
+          about what the Tidebound have been choosing not to know.
+        emotional_core: >-
+          The terror of being right about something everyone else
+          has decided not to see. And the deeper terror: the data
+          is right too. The rhythm holds. And something is still
+          changing.
+        world_details: >-
+          The Breathing Ledger (17 centuries, 17 marker-stones,
+          Thursa archives), Reckoners (neutral adjudicators, property-
+          less, trained in oral history), the Farflat formations
+          (calcium-ite aggregate, singing through worm-tubes, concave
+          tops, channel networks), vaskrel (eating the channels),
+          the Silence in the ruin record, ocean-going vessels in
+          anoxic sediment
+        ending_note: >-
+          End with her return to Thursa. Her report is filed and
+          acknowledged. The Breathing Ledger's margin gains one more
+          note in one more hand. The formations sang later this year.
+          And in a line of data spanning centuries, that sentence
+          appears, in different writing, with quiet, accumulating
+          regularity — and no one has ever recorded them singing
+          earlier.
+
+  template: |
+    {% macro story_header(title, subtitle) %}
+    # {{ collection.title }}: {{ title }}
+    *{{ subtitle }}*
+    *Tone: {{ collection.tone }}*
+    {% endmacro %}
+
+    {% macro collection_context() %}
+    ## The Collection
+    **{{ collection.title }}** — *{{ collection.subtitle }}*
+
+    {{ collection.thematic_arc }}
+
+    The five stories:
+    {% for i in range(1, 6) %}
+    {{ i }}. *{{ stories[i].title }}* — {{ stories[i].season }}
+    {% endfor %}
+    {% endmacro %}
+
+    {% if stage == 1 %}
+    {{ story_header("Creative Brief", "Stage 1 — Preparing the World for Fiction") }}
+
+    You are the creative director for a short story collection set in
+    The Tidebound world. Your job is to read the complete world bible
+    and produce a condensed creative reference — everything a fiction
+    writer needs to inhabit this world convincingly.
+
+    ## Read the World Bible
+    The complete reference is at: {{ world_bible_path }}
+    Read it in full. Absorb it. You need to know this world well
+    enough to write naturally inside it.
+
+    {{ collection_context() }}
+
+    ## Your Task
+
+    Write a creative brief (2000-3000 words) that:
+
+    1. **Condenses the world for fiction writers** — The world bible is
+       a reference document. Extract what a fiction writer needs:
+       sensory details, vocabulary, social dynamics, the rhythm of
+       daily life. What does the air smell like on Velsha morning?
+       What does a kem sound like at midnight in Sovwei? How do people
+       greet each other? What do they eat? How do they move?
+
+    2. **Establishes the sensory palette** — Fiction lives in the senses.
+       Pull the most evocative details from every section of the world
+       bible. Organize by season, by location, by sense.
+
+    3. **Maps the emotional landscape** — What does it FEEL like to be
+       Tidebound? The joy of return, the ache of leaving, the patience
+       of watching the velu, the dread of the vaskrel, the wonder of
+       the formations singing at dusk. These feelings are the raw
+       material for fiction.
+
+    4. **Lists the key vocabulary** — Every invented word a story writer
+       might need, with pronunciation and meaning. A quick-reference
+       glossary, not the full world bible version.
+
+    5. **Notes the mysteries** — The formations singing later. The
+       calcium-ite objects from beyond the Glint. The Lost Builders'
+       ocean-going ships. The Silence in the ruin record. These are
+       the threads that connect the stories beneath the surface.
+
+    ---
+    Save to {{ workspace }}/01-brief.md
+    Write for fiction writers, not worldbuilders. The brief should make
+    someone want to write a story, not design a game.
+
+    {% elif stage == 2 %}
+    {% set story = stories[instance] %}
+    {{ story_header(story.title, "A short story — " ~ story.season) }}
+
+    You are a fiction writer. You have been given a world, a character,
+    and a situation. Your job is to write a complete short story —
+    {{ collection.word_count_per_story }} — that inhabits this world
+    so thoroughly that a reader forgets it was invented.
+
+    {% if previous_outputs[1] is defined %}
+    ## The World (Creative Brief)
+    {{ previous_outputs[1] | truncate(3000) }}
+    {% endif %}
+
+    For the complete world reference, read: {{ world_bible_path }}
+
+    ## Your Story: {{ story.title }}
+
+    **Season:** {{ story.season }}
+    **Point of View:** {{ story.pov }}
+
+    **Situation:**
+    {{ story.situation }}
+
+    **Emotional Core:**
+    {{ story.emotional_core }}
+
+    **World Details to Draw On:**
+    {{ story.world_details }}
+
+    **Ending:**
+    {{ story.ending_note }}
+
+    ## The Other Stories in This Collection
+    You are writing one story in a collection of five. You do NOT see
+    the other stories. Here are their titles, so you can avoid
+    accidental overlap:
+    {% for i in range(1, 6) %}
+    {% if i != instance %}
+    - *{{ stories[i].title }}* ({{ stories[i].season }})
+    {% endif %}
+    {% endfor %}
+
+    ## Writing Guidelines
+
+    - **Write a complete short story**, not an outline or summary.
+      Beginning, middle, end. Scenes, dialogue, interiority.
+
+    - **Inhabit the world.** Use the invented vocabulary naturally —
+      not as exotic decoration but as the words these people actually
+      use. A Voshu child doesn't think "bioluminescent crustacean."
+      She thinks "rethka."
+
+    - **Ground every scene in sensory detail.** What does the character
+      see, hear, smell, touch, taste? The world bible's sensory palette
+      is your toolkit. The shelf smells of iron and green. The tolhu
+      crackle like distant applause. Tide-tempered fabric is stiff
+      and slightly gritty.
+
+    - **Let the world do the work.** The most powerful moments in this
+      world come from its own physics — the silence on Velsha morning,
+      the dimpling of the ground above a vaskrel, the singing of
+      formations at dusk. You don't need to manufacture drama. The
+      world provides it.
+
+    - **No exposition dumps.** The character lives here. They don't
+      explain their world to the reader any more than you explain
+      gravity. Weave worldbuilding into action, perception, memory.
+
+    - **Honor the tone.** {{ collection.tone }} — This means: precise
+      prose, emotional depth, wonder without sentimentality, strangeness
+      without exoticism. The people are real. The science is speculative
+      but grounded. The beauty is in the specific.
+
+    - **{{ collection.word_count_per_story }}.** Enough to tell a
+      complete story, not enough to indulge. Every scene earns its place.
+
+    ---
+    Save to {{ workspace }}/02-{{ story.slug }}.md
+    Write fiction, not a report. Write the story you would want to read.
+
+    {% elif stage == 3 %}
+    {{ story_header("Editorial Notes", "Stage 3 — Discovering the Collection") }}
+
+    Five stories have been written independently, set in the same world,
+    by writers who did not see each other's work. Your job is the most
+    delicate: read all five stories and discover what collection they
+    have become.
+
+    ## Read All Five Stories
+    The stories are saved in {{ workspace }}/:
+    {% for i in range(1, 6) %}
+    - `02-{{ stories[i].slug }}.md` — *{{ stories[i].title }}*
+    {% endfor %}
+
+    Read each story in full. Take your time. These are not documents
+    to skim. They are fiction to experience.
+
+    {% if previous_outputs %}
+    ## Story Excerpts (from cross-sheet context)
+    {% for key, output in previous_outputs.items() %}
+    {% if key | int > 1 %}
+
+    ### {{ stories[key | int - 1].title }} (excerpt)
+    {{ output | truncate(1500) }}
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+
+    ## Your Task
+
+    Write editorial notes (1500-2500 words) that:
+
+    1. **Determine the sequence.** In what order should these five
+       stories be read? Not necessarily the order they were written
+       or the chronological order of their seasons. What sequence
+       creates the strongest emotional arc? Where should the reader
+       begin, and where should they end?
+
+    2. **Find the emergent connections.** Did any two stories
+       independently develop the same theme, reference the same
+       place, or create characters who could plausibly meet? These
+       unplanned resonances are the collection's skeleton — the
+       evidence that the world is coherent enough to produce
+       convergence from independence.
+
+    3. **Write the introduction.** 500-800 words that frame the
+       collection for a reader who knows nothing about The Tidebound.
+       Not a world bible summary — an invitation. Why these stories?
+       Why this world? What does the reader need to feel before
+       they begin?
+
+    4. **Note what surprised you.** As an editor reading five
+       independent takes on the same world, what did you not expect?
+       What emerged from the collision of these five imaginations
+       that none of them individually contained?
+
+    5. **Assess quality honestly.** Which story is strongest? Which
+       needs the most revision? Where did the world feel most alive,
+       and where did it feel like set dressing? Be specific and
+       constructive.
+
+    ---
+    Save to {{ workspace }}/03-editorial.md
+    Write as an editor who loves these stories and wants to make the
+    collection as strong as it can be.
+
+    {% elif stage == 4 %}
+    {{ story_header("The Complete Collection", "Stage 4 — Assembly") }}
+
+    Everything has been written and edited. Now compile the collection
+    into a single, reading-ready document.
+
+    ## Read Everything
+    - Editorial notes: {{ workspace }}/03-editorial.md
+    - All five stories in {{ workspace }}/02-*.md
+    - The creative brief: {{ workspace }}/01-brief.md
+
+    {% if previous_outputs %}
+    ## Editorial Notes (from cross-sheet context)
+    {{ previous_outputs.values() | list | last | truncate(3000) }}
+    {% endif %}
+
+    ## Assembly Instructions
+
+    Compile the collection as follows:
+
+    1. **Title page**
+       # {{ collection.title }}
+       *{{ collection.subtitle }}*
+
+    2. **Introduction** — Use the introduction from the editorial notes
+       (Stage 3). Polish it if needed, but preserve its voice.
+
+    3. **The five stories** — In the sequence recommended by the
+       editorial notes. Each story gets:
+       - A title page with the story title and a one-line epigraph
+         drawn from the story itself
+       - The full story text
+       - A brief separator between stories
+
+    4. **Afterword: How This Collection Was Made** (300-500 words)
+       Explain, briefly and honestly, that these stories were written
+       independently by five parallel writers sharing a world bible
+       but not each other's pages. Note the emergent connections the
+       editor found. Let the reader know that the coherence they felt
+       was not designed — it was discovered.
+
+    5. **Glossary** — A compact reference for the Tidebound vocabulary
+       used across all five stories. Only include terms that actually
+       appear in the stories.
+
+    ---
+    Save to {{ workspace }}/04-collection.md
+    This is the final deliverable. A reader should be able to open
+    this document and read a complete, polished short story collection
+    from beginning to end.
+    {% endif %}
+
+validations:
+  - type: file_exists
+    path: "{workspace}/01-brief.md"
+    condition: "stage == 1"
+
+  - type: file_exists
+    path: "{workspace}/03-editorial.md"
+    condition: "stage == 3"
+
+  - type: file_exists
+    path: "{workspace}/04-collection.md"
+    condition: "stage == 4"
+
+  - type: content_contains
+    path: "{workspace}/01-brief.md"
+    pattern: "solha"
+    condition: "stage == 1"
+    description: "Brief should reference the world's key emotional concept"
+
+  - type: content_contains
+    path: "{workspace}/04-collection.md"
+    pattern: "Breathing Shore"
+    condition: "stage == 4"
+    description: "Collection should contain the collection title"
