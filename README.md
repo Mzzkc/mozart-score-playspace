@@ -10,7 +10,7 @@ These scores were written by Claude (Opus) during an open-ended creative session
 
 ### Scores (`scores/`)
 
-Five Mozart scores spanning philosophy, hospitality, education, creative writing, and meta-cognition. Each demonstrates a different composition pattern.
+Seven Mozart scores spanning philosophy, hospitality, education, creative writing, meta-cognition, and translation theory. Each demonstrates a different composition pattern.
 
 | Score | Domain | Pattern | Stages | Sheets |
 |---|---|---|---|---|
@@ -19,6 +19,8 @@ Five Mozart scores spanning philosophy, hospitality, education, creative writing
 | **[dinner-party.yaml](scores/dinner-party.yaml)** | Hospitality | Functional fan-out | 3 | 6 |
 | **[skill-builder.yaml](scores/skill-builder.yaml)** | Education | Graduated fan-out | 5 | 7 |
 | **[worldbuilder.yaml](scores/worldbuilder.yaml)** | Creative writing | Generative fan-out | 4 | 8 |
+| **[tidebound-stories.yaml](scores/tidebound-stories.yaml)** | Fiction | Mosaic fan-out | 4 | 8 |
+| **[palimpsest.yaml](scores/palimpsest.yaml)** | Translation | Translational fan-out | 4 | 8 |
 
 #### The Dialectic
 
@@ -40,6 +42,14 @@ Progressive curriculum generator. Assessment → core concepts → 3 difficulty 
 
 Generative fan-out: build a fictional world through 5 independent creative lenses (geography, culture, ecology, technology, history), then synthesize into a coherent setting and compile a world bible. Tests whether independent creative visions interlock the way independent analytical critiques did in the dialectic.
 
+#### The Tidebound Stories
+
+Mosaic fan-out: five independent short stories set in the Tidebound world (built by the worldbuilder score), written by five parallel authors who share a world bible but not each other's drafts. An editorial stage discovers the collection's emergent arc. Tests whether independent fiction, sharing only a world, produces narrative coherence nobody designed.
+
+#### The Palimpsest
+
+Translational fan-out: a source text (default: an original poem, "What the River Knows") is translated through five radically different representational modes — painting, music, mathematics, personal correspondence, and adversarial genre destruction. None see each other's work. A synthesis stage identifies the meaning-invariant: the thing all five preserved. A final stage writes a response — not to the poem, but to the invariant. Tests whether meaning is substrate-independent. The mathematician found grace in a formal singularity. The stranger wrote a product recall notice. Change `source.text` to translate anything.
+
 ### Documents
 
 - **[primer.md](primer.md)** — Progressive Jinja2 tutorial for Mozart score composers. 9 levels from basic variables to advanced patterns. Includes a philosophy of score design.
@@ -47,7 +57,7 @@ Generative fan-out: build a fictional world through 5 independent creative lense
 
 ### Output (`*-workspace/`)
 
-Generated output from scores that have been run through Mozart. The `dialectic-workspace/` contains ~80KB of philosophical argumentation across 6 files.
+Generated output from scores that have been run through Mozart. The `dialectic-workspace/` contains ~80KB of philosophical argumentation across 6 files. The `palimpsest-workspace/` contains ~85KB across 8 files: a close reading, five translations, an invariant analysis, and a response poem.
 
 ---
 
@@ -84,8 +94,10 @@ The central discovery: fan-out isn't just parallelism. It's structured pluralism
 | **Functional** | Same goal, different planning domains | dinner-party |
 | **Graduated** | Same content, different difficulty levels | skill-builder |
 | **Generative** | Same seed, different creative lenses | worldbuilder |
+| **Mosaic** | Same world, different stories | tidebound-stories |
+| **Translational** | Same text, different representational substrates | palimpsest |
 
-The synthesis stage that follows fan-out is where emergence happens. Independent outputs produce rhymes, tensions, and convergences that no single perspective would generate. The dialectic's convergence on "hidden Cartesianism" across three philosophical traditions — without coordination — was the proof of concept.
+The synthesis stage that follows fan-out is where emergence happens. Independent outputs produce rhymes, tensions, and convergences that no single perspective would generate. The dialectic's convergence on "hidden Cartesianism" across three philosophical traditions — without coordination — was the proof of concept. The palimpsest's convergence on the identity of creation and erasure — across painting, music, mathematics, correspondence, and bureaucratic satire — extended the finding from propositions to meaning itself.
 
 ---
 
@@ -100,6 +112,8 @@ Every score is designed to be reusable. The `prompt.variables` section contains 
 **Dinner Party:** Change `guests` (names, diets, relationships) and `event` (occasion, atmosphere, constraints).
 
 **Worldbuilder:** Change `world_seed` (name, premise, tone, constraints) to build any fictional world.
+
+**Palimpsest:** Change `source.text` to translate any dense text (poem, passage, fragment) through five representational modes.
 
 ---
 
