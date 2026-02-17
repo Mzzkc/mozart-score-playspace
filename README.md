@@ -67,7 +67,7 @@ You need [Mozart AI Compose](https://github.com/emzi-ai/mozart-ai-compose) insta
 
 ```bash
 # Start the daemon
-mozartd start
+mozart start
 
 # Run any score
 mozart run scores/dialectic.yaml
